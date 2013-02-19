@@ -1,12 +1,17 @@
 from django.db import models
 
+# Create your models here.
 class Language(models.Model):
     name = models.CharField(max_length=200)
+    def __unicode__(self):
+        return u'%s' % (self.name)
 
-class snippet(models.Model):
+class Snippet(models.Model):
     code = models.TextField()
     language = models.ForeignKey(Language)
     leet = models.IntegerField()
     lame = models.IntegerField()
-# Create your models here.
-#CREATE TABLE snippets (id INTEGER PRIMARY KEY, code text, lang_id INTEGER, leet_count INTEGER DEFAULT 0, lame_count INTEGER DEFAULT 0);
+    def __unicode__(self):
+        return u'%s' % (self.code[0:10])
+
+
