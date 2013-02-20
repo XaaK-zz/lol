@@ -18,6 +18,7 @@
 
 <br/>
 <form action="/rate/{{ snippet.id }}/" method="post">
+    {% csrf_token %}
     <input type="submit" name="submitButton" value="Leet" />
     <input type="submit" name="submitButton" value="Lame" />
 </form>

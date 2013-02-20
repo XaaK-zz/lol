@@ -16,7 +16,7 @@
     {% csrf_token %}
     <textarea name="code" rows=30 cols=80></textarea>
     <br/>
-    <select name="language">
+    <select name="language_id">
 {% for language in languages %}
     <option value="{{ language.id }}">{{ language.name }}</option>
 {% endfor %}
