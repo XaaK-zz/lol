@@ -9,4 +9,5 @@ def index(request):
     return render_to_response('index.html', {'snippet': random})
 
 def upload(request):
-        return HttpResponse("Hello, world. You're at the upload page.")
+    languages = Language.objects.all().order_by('name')
+    return render_to_response('upload.html', {'languages': languages})

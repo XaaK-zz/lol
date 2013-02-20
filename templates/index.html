@@ -6,8 +6,6 @@
 {% block extrastyle %}
 <link href="{% static 'css/prettify.css' %}" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
-
-
 {% endblock %}
 
 {% block branding %}
@@ -17,7 +15,12 @@
 {% block content %}
 {% if snippet %}
 <code class="prettyprint">{{ snippet.code }}</code>
-    <a href="/rate/{{ snippet.id }}/"></a>
+
+<br/>
+<form action="/rate/{{ snippet.id }}/" method="post">
+    <input type="submit" name="submitButton" value="Leet" />
+    <input type="submit" name="submitButton" value="Lame" />
+</form>
 {% else %}
     <p>No snippets are available.</p>
 {% endif %}
