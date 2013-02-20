@@ -29,5 +29,6 @@ def new(request):
     return redirect('index')
 
 def top(request, limit):
-    top = Snippet.objects.all().order_by('leet')[:limit]
+    limit = int(limit)
+    top = sorted(Snippet.objects.all(), key=lambda a: a.score)[:limit]
     return render_to_response('top.html', {'top': top, 'limit': limit})
