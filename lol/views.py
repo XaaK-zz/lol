@@ -28,3 +28,6 @@ def new(request):
     s.save()
     return redirect('index')
 
+def top(request, limit):
+    top = Snippet.objects.all().order_by('leet')[:limit]
+    return render_to_response('top.html', {'top': top, 'limit': limit})

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %} Top {{ limit }} Snippets {% endblock %}
+{% load staticfiles %}
+
+{% block extrastyle %}
+<link href="{% static 'css/prettify.css' %}" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">Leet or Lame</h1>
+{% endblock %}
+
+{% block content %}
+<ol>
+{% for snippet in top %}
+<li> Snippet in {{ snippet.language }} with a leetness of {{ snippet.score }} </li>
+    <pre class="prettyprint">{{ snippet.code }}</pre>
+{% endfor %}
+</ol>
+{% endblock %}
+
