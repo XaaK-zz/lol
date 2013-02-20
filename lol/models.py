@@ -9,8 +9,8 @@ class Language(models.Model):
 class Snippet(models.Model):
     code = models.TextField()
     language = models.ForeignKey(Language)
-    leet = models.IntegerField()
-    lame = models.IntegerField()
+    leet = models.IntegerField(default=0)
+    lame = models.IntegerField(default=0)
     def __unicode__(self):
         return u'%s' % (self.code[0:10])
 

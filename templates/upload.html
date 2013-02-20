@@ -12,7 +12,8 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="/upload/new/" method="post">
+<form action="{% url new %}" method="post">
+    {% csrf_token %}
     <textarea name="code" rows=30 cols=80></textarea>
     <br/>
     <select name="language">
