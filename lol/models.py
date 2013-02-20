@@ -14,4 +14,7 @@ class Snippet(models.Model):
     def __unicode__(self):
         return u'%s' % (self.code[0:10])
 
-
+    def _get_score(self):
+        "Returns the diff of leet and lame"
+        return self.leet - self.lame
+    score = property(_get_score)
