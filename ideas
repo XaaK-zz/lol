@@ -1,5 +1,8 @@
 move branding to base.html
 css
 improvements to gist integration (language detection, multiple files, move to js so user can validate before submisison)
+export to gist ("Fork and improve!"/ "Think you can do better?")
+parent_id in db to represent code forked from previous entry.  
+gist_id in db so the gist can be linked to
 navigation header
 twitter or github oauth integration
