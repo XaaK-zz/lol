@@ -13,10 +13,8 @@
 {% endblock %}
 
 {% block content %}
-{% if snippet %}
-<pre class="prettyprint">{{ snippet.code }}</pre>
 <div class="description">{{ snippet.description}}</div>
-<div class="score">This snippets score is {{ snippet.score }} </div>
+<pre class="prettyprint">{{ snippet.code }}</pre>
 <div class="submit">
     <br/>
     <form action="/rate/{{ snippet.id }}/" method="post">
@@ -25,11 +23,11 @@
         <input type="submit" name="submitButton" value="Lame" />
     </form>
 </div>
-{% else %}
-    <p>No snippets are available.</p>
-{% endif %}
 
 <a href="{% url upload %}">Add yours!</a>
+<a href="{% url top 10 %}">Top 10</a>
+<a href="{% url view snippet.id %}">This snippets score</a>
+<a href="{% url index %}">Random snippet</a>
 
 {% endblock %}
 
