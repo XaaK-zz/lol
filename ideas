@@ -1,4 +1,5 @@
 css
+improvements to gist integration (language detection, multiple files, move to js so user can validate before submisison)
+combine index and rate views
 navigation header
-gist integration (pull from)
 twitter or github oauth integration

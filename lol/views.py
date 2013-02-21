@@ -43,8 +43,6 @@ def view(request, snippet_id):
     return render_to_response('view.html', {'snippet': snippet})
 
 def import_gist(request):
-    #@TODO: cleanup, maybe support multiple files, 
-    #@TODO: support language if defined in gist, move to frontend js so client can validate before submission
     if request.method == 'POST':
         gist_id = request.POST['gist_id']
         r = requests.get("https://api.github.com/gists/%s" % gist_id)
