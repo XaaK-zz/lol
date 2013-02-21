@@ -13,7 +13,7 @@ class Snippet(models.Model):
     leet = models.IntegerField(default=0)
     lame = models.IntegerField(default=0)
     def __unicode__(self):
-        return u'%s' % (self.code[0:10])
+        return u'%s' % (self.description)
 
     def _get_score(self):
         "Returns the diff of leet and lame"
