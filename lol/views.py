@@ -32,3 +32,9 @@ def top(request, limit):
     limit = int(limit)
     top = sorted(Snippet.objects.all(), key=lambda a: a.score)[:limit]
     return render_to_response('top.html', {'top': top, 'limit': limit})
+
+def view(request, snippet_id):
+    snippet = get_object_or_404(Snippet, pk=snippet_id)
+    return render_to_response('view.html', {'snippet': snippet})
+
+

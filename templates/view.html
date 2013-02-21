@@ -14,17 +14,9 @@
 
 {% block content %}
 {% if snippet %}
-<pre class="prettyprint">{{ snippet.code }}</pre>
 <div class="description">{{ snippet.description}}</div>
+<pre class="prettyprint">{{ snippet.code }}</pre>
 <div class="score">This snippets score is {{ snippet.score }} </div>
-<div class="submit">
-    <br/>
-    <form action="/rate/{{ snippet.id }}/" method="post">
-        {% csrf_token %}
-        <input type="submit" name="submitButton" value="Leet" />
-        <input type="submit" name="submitButton" value="Lame" />
-    </form>
-</div>
 {% else %}
     <p>No snippets are available.</p>
 {% endif %}

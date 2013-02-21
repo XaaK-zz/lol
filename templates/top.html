@@ -16,6 +16,7 @@
 <ol>
 {% for snippet in top %}
 <li> Snippet in {{ snippet.language }} with a leetness of {{ snippet.score }} </li>
+    <div class="description">{{ snippet.description }}</div>
     <pre class="prettyprint">{{ snippet.code }}</pre>
 {% endfor %}
 </ol>

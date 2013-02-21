@@ -7,6 +7,7 @@ class Language(models.Model):
         return u'%s' % (self.name)
 
 class Snippet(models.Model):
+    description = models.CharField(max_length=200)
     code = models.TextField()
     language = models.ForeignKey(Language)
     leet = models.IntegerField(default=0)
