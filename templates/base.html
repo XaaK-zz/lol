@@ -13,6 +13,10 @@
 
     <!-- Header -->
     <div id="header">
+        <a href="{% url upload %}">Add yours!</a>
+        <a href="{% url top 10 %}">Top 10</a>
+        <a href="{% url index %}">Random snippet</a>
+     
         <div id="branding">
         {% block branding %}{% endblock %}
         </div>
@@ -32,7 +36,9 @@
     </div>
     <!-- END Content -->
 
-    {% block footer %}<div id="footer"></div>{% endblock %}
+    {% block footer %}<div id="footer">
+   
+    </div>{% endblock %}
 </div>
 <!-- END Container -->
 
