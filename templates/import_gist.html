@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Add yours!{% endblock %}
+{% block title %}Import Gist{% endblock %}
 {% load staticfiles %}
 
 
@@ -12,12 +12,9 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url new %}" method="post">
+<form action="{% url import_gist %}" method="post">
     {% csrf_token %}
-    Description: <input type="text" name="description"/>
-    <br/>
-    Code:
-    <textarea name="code" rows=30 cols=80></textarea>
+    Gist ID: <input type="text" name="gist_id">
     <br/>
     <select name="language_id">
 {% for language in languages %}

@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import Context, loader, RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from lol.models import Snippet, Language
+import requests, json
 
 def index(request):
     random = Snippet.objects.order_by('?')[0]
@@ -24,7 +25,7 @@ def rate(request, snippet_id):
 
 def new(request):
     lang = get_object_or_404(Language, pk=request.POST['language_id'])
-    s = Snippet(code=request.POST['code'], language=lang)
+    s = Snippet(code=request.POST['code'], description=request.POST['description'], language=lang)
     s.save()
     return redirect('index')
 
@@ -37,4 +38,27 @@ def view(request, snippet_id):
     snippet = get_object_or_404(Snippet, pk=snippet_id)
     return render_to_response('view.html', {'snippet': snippet})
 
+def import_gist(request):
+    #@TODO: cleanup, maybe support multiple files, 
+    #@TODO: support language if defined in gist, move to frontend js so client can validate before submission
+    if request.method == 'POST':
+        gist_id = request.POST['gist_id']
+        r = requests.get("https://api.github.com/gists/%s" % gist_id)
+        data = json.loads(r.content)
+        description = data['description']
+        files = data['files'].keys()
+        first = data['files'][files[0]]
+        #lang = first['language']
+        raw_url = first['raw_url']
+        file_request = requests.get(raw_url)
+        code = file_request.content
+        lang = get_object_or_404(Language, pk=request.POST['language_id'])
+        s = Snippet(code=code, description=description, language=lang)
+        s.save()
+        return redirect('index')
+        #return HttpResponse("%s." % code)
+
+    elif request.method == 'GET':
+        languages = Language.objects.all().order_by('name')
+        return render_to_response('import_gist.html', {'languages': languages}, context_instance=RequestContext(request))
 
