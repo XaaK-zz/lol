@@ -17,8 +17,9 @@
 <pre class="prettyprint">{{ snippet.code }}</pre>
 <div class="submit">
     <br/>
-    <form action="/rate/{{ snippet.id }}/" method="post">
+    <form action="{% url index %}" method="post">
         {% csrf_token %}
+        <input type="hidden" name="snippet_id" value="{{ snippet.id }}" />
         <input type="submit" name="submitButton" value="Leet" />
         <input type="submit" name="submitButton" value="Lame" />
     </form>
