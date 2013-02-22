@@ -1,7 +1,5 @@
 css
-improvements to gist integration (language detection, multiple files)
+improvements to gist integration (multiple files)
 export to gist ("Fork and improve!"/ "Think you can do better?")
-parent_id in db to represent code forked from previous entry.  
-gist_id in db so the gist can be linked to
 navigation header
 twitter or github oauth integration
