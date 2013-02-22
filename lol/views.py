@@ -40,25 +40,3 @@ def view(request, snippet_id):
     snippet = get_object_or_404(Snippet, pk=snippet_id)
     return render_to_response('view.html', {'snippet': snippet})
 
-def import_gist(request):
-    if request.method == 'POST':
-        gist_id = request.POST['gist_id']
-        r = requests.get("https://api.github.com/gists/%s" % gist_id)
-        data = json.loads(r.content)
-        description = data['description']
-        files = data['files'].keys()
-        first = data['files'][files[0]]
-        #lang = first['language']
-        raw_url = first['raw_url']
-        file_request = requests.get(raw_url)
-        code = file_request.content
-        lang = get_object_or_404(Language, pk=request.POST['language_id'])
-        s = Snippet(code=code, description=description, language=lang)
-        s.save()
-        return redirect('index')
-        #return HttpResponse("%s." % code)
-
-    elif request.method == 'GET':
-        languages = Language.objects.all().order_by('name')
-        return render_to_response('import_gist.html', {'languages': languages}, context_instance=RequestContext(request))
-

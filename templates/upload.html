@@ -5,6 +5,32 @@
 
 {% block content %}
 
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#import_gist').click(function(){ 
+        code_box = $("textarea[name='code']");
+        description_box = $("input[name='description']");
+        gist_id = $("input[name='gist_id']").val();
+        url = "https://api.github.com/gists/" + gist_id;
+        $.ajax({ 
+            url      : url, 
+            dataType : 'jsonp', 
+            timeout  : 10000,
+            success: function(response) {
+                description_box.val(response['description']);
+                for (file in response.data.files) {
+                    if (response.data.files.hasOwnProperty(file)) {
+                        code_box.val(response.data.files[file].content);
+                    }
+                }
+            }
+        }); 
+    });
+});
+
+</script>
+
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="{% url upload %}" method="post">
@@ -22,6 +48,11 @@
     <br/>
 <input type="submit" value="Submit" />
 </form>
+<div class="import_gist"> 
+    Import gist by id: <input type="text" name="gist_id" />
+    <input type="submit" id="import_gist" value="Import" />
+</div>
+
 
 {% endblock %}
 
