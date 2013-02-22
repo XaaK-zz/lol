@@ -54,6 +54,7 @@
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" onload="prettyPrint()">
 
 <!-- Container -->
+{% load tags %}
 <div id="container">
 
     <!-- Header -->
@@ -66,9 +67,9 @@
                 <div class="navbar-inner">
                   <div class="container">
                     <ul class="nav">
-                      <li class="active"><a href="{% url index %}">Random LoL</a></li>
-                      <li><a href="{% url top 10 %}">Top 10</a></li>
-                      <li><a href="{% url upload %}">Add Yours!</a></li>
+                      <li class="{% block active_random %}{% endblock %}"><a href="{% url index %}">Random LoL</a></li>
+                      <li class="{% block active_top %}{% endblock %}"><a href="{% url top 10 %}">Top 10</a></li>
+                      <li class="{% block active_upload %}{% endblock %}"><a href="{% url upload %}">Add Yours!</a></li>
                     </ul>
                   </div>
                 </div>
