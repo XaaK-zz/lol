@@ -27,7 +27,7 @@ def upload(request):
         return render_to_response('upload.html', {'languages': languages}, context_instance=RequestContext(request))
     elif request.method == 'POST':
         lang = get_object_or_404(Language, pk=request.POST['language_id'])
-        s = Snippet(code=request.POST['code'], description=request.POST['description'], language=lang)
+        s = Snippet(code=request.POST['code'], description=request.POST['description'], gist_id=request.POST['gist_id'], language=lang)
         s.save()
         return redirect('index')
 

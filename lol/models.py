@@ -10,8 +10,10 @@ class Snippet(models.Model):
     description = models.CharField(max_length=200)
     code = models.TextField()
     language = models.ForeignKey(Language)
+    parent = models.ForeignKey('self', null=True)
     leet = models.IntegerField(default=0)
     lame = models.IntegerField(default=0)
+    gist_id = models.IntegerField(default=0)
     def __unicode__(self):
         return u'%s' % (self.description)
 
