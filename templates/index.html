@@ -8,10 +8,6 @@
 <script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
 {% endblock %}
 
-{% block branding %}
-<h1 id="site-name">Leet or Lame</h1>
-{% endblock %}
-
 {% block content %}
 <div class="description">{{ snippet.description}}</div>
 <pre class="prettyprint">{{ snippet.code }}</pre>
