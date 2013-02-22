@@ -33,7 +33,7 @@ def upload(request):
 
 def top(request, limit):
     limit = int(limit)
-    top = sorted(Snippet.objects.all(), key=lambda a: a.score)[:limit]
+    top = sorted(Snippet.objects.all(), key=lambda a: a.score, reverse=True)[:limit]
     return render_to_response('top.html', {'top': top, 'limit': limit})
 
 def view(request, snippet_id):
