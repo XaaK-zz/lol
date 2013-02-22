@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from django.template import Context, loader, RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from lol.models import Snippet, Language
-import requests, json
 
 def index(request):
     if request.method == 'GET':
