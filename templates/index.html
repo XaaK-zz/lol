@@ -1,21 +1,58 @@
 {% extends "base.html" %}
 
 {% block title %}Leet or Lame{% endblock %}
+{% load staticfiles %}
 
-{% block content %}
-<div class="description">{{ snippet.description}}</div>
-<pre class="prettyprint">{{ snippet.code }}</pre>
-<div class="submit">
-    <br/>
-    <form action="{% url index %}" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="snippet_id" value="{{ snippet.id }}" />
-        <input type="submit" name="submitButton" value="Leet" />
-        <input type="submit" name="submitButton" value="Lame" />
-    </form>
+{% block extrastyle %}
+<link href="{% static 'css/prettify.css' %}" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
+ 
+{% endblock %}
+
+{% block active_random %}active{% endblock %}
+
+{% block branding %}
+<div class="mainHeader">
+    <h1 id="site-name">Leet or Lame</h1>
 </div>
-
-<a href="{% url view snippet.id %}">This snippets score</a>
-
+{% endblock %}
+ 
+{% block content %}
+<div class="container">
+    
+    <div class="row-fluid">
+        <div class="span3">
+        </div>
+        <div class="span6">  
+            <div class="description">{{ snippet.description}}</div>
+        </div>
+    </div>
+     <div class="row-fluid">
+        <div class="span3">
+        </div>
+                    <div class="span6">
+                        <pre class="prettyprint">{{ snippet.code }}</pre>
+                    </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4"></div>
+        <form action="/rate/{{ snippet.id }}/" method="post">
+            {% csrf_token %}
+            <div class="span1">
+                <input type="submit" name="submitButton" value="Leet" />
+            </div>
+            <div class="span2"></div>
+            <div class="span1">
+                <input type="submit" name="submitButton" value="Lame" />
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class="row-fluid">    
+        <div class="span3"></div>
+        <div class="span6">
+            <a href="{% url view snippet.id %}">This snippets score</a>
+        </div>
+    </div>
 {% endblock %}
 
