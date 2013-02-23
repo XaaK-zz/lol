@@ -15,22 +15,44 @@
 {% block content %}
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-<form action="{% url upload %}" method="post">
-    {% csrf_token %}
-    Description: <input type="text" name="description"/>
-    <br/>
-    Code:
-    <textarea name="code" rows=30 cols=80></textarea>
-    <br/>
-    <select name="language_id">
-{% for language in languages %}
-    <option value="{{ language.id }}">{{ language.name }}</option>
-{% endfor %}
-    </select>
-    <br/>
-<input type="submit" value="Submit" />
+<form action="{% url upload %}" method="post" class="form-horizontal">
+{% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="span1"></div>
+            <div class="span9">
+                <div class="control-group">
+                    <label class="control-label" for="inputDescription">Description:</label>
+                    <div class="controls">
+                        <input type="text" name="description" id="inputDescription" class="input-block-level"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="inputCode">Code:</label>
+                    <div class="controls">
+                        <textarea name="code" rows="10" id="inputCode" class="input-block-level"></textarea>
+                     </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <select name="language_id">
+    {% for language in languages %}
+                            <option value="{{ language.id }}">{{ language.name }}</option>
+    {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">    
+            <div class="span5"></div>
+            <div class="span6">
+                <input type="submit" value="Submit" />
+            </div>
+        </div>
+    </div>
 </form>
+
 
 {% endblock %}
 
