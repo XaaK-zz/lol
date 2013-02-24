@@ -14,7 +14,7 @@
 <link href="{% static 'css/lol.css' %}" rel="stylesheet" media="screen">
 </head>
 
-<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" onload="prettyPrint()">
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" {% block onload %}{% endblock %}>
 
 <!-- Container -->
 {% load tags %}
