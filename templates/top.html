@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load tags %}
 {% block title %} Top {{ limit }} Snippets {% endblock %}
 
 {% block active_top %}active{% endblock %}
@@ -13,9 +14,10 @@
 {% block content %}
 <ol>
 {% for snippet in top %}
+
 <li> Snippet in {{ snippet.language }} with a leetness of {{ snippet.score }} </li>
     <div class="description">{{ snippet.description }}</div>
-    <pre class="prettyprint">{{ snippet.code }}</pre>
+    <pre class="prettyprint">{{ snippet.code|tenlines }}</pre>
 {% endfor %}
 </ol>
 {% endblock %}
