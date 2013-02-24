@@ -22,7 +22,7 @@ def index(request):
 
 def upload(request):
     if request.method == 'GET':
-        languages = Language.objects.all().order_by('name')
+        languages = Language.objects.all().extra(select={'lower_name': 'lower(name)'}).order_by('lower_name')
         return render_to_response('upload.html', {'languages': languages}, context_instance=RequestContext(request))
     elif request.method == 'POST':
         lang = get_object_or_404(Language, pk=request.POST['language_id'])
