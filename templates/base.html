@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <title>{% block title %}{% endblock %}</title>
 {% load staticfiles %}
@@ -7,29 +7,43 @@
 <script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
 {% block extrastyle %}{% endblock %}
 {% block extrahead %}{% endblock %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<link href="{{ STATIC_URL }}/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="{{ STATIC_URL }}/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+<link href="{{ STATIC_URL }}/css/lol.css" rel="stylesheet" media="screen">
 </head>
 
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" onload="prettyPrint()">
 
 <!-- Container -->
-<div id="container">
-
+{% load tags %}
     <!-- Header -->
     <div id="header">
-        <a href="{% url upload %}">Add yours!</a>
-        <a href="{% url top 10 %}">Top 10</a>
-        <a href="{% url index %}">Random snippet</a>
-     
-        <div id="branding">
-        {% block branding %}
-        <h1 id="site-name">Leet or Lame</h1>
-        {% endblock %}
+        <div class="container">
+            <div class="masthead">
+              <div class="navbar">
+                <div class="navbar-inner">
+                  <div class="container">
+                    <ul class="nav">
+                      <li class="{% block active_random %}{% endblock %}"><a href="{% url index %}">Random LoL</a></li>
+                      <li class="{% block active_top %}{% endblock %}"><a href="{% url top 10 %}">Top 10</a></li>
+                      <li class="{% block active_upload %}{% endblock %}"><a href="{% url upload %}">Add Yours!</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div><!-- /.navbar -->
+            </div>
+        
+            <div id="branding">
+            {% block branding %}{% endblock %}
+            </div>
         </div>
     </div>
     <!-- END Header -->
 
     <!-- Content -->
-    <div id="content" class="{% block coltype %}colM{% endblock %}">
+    <div id="content">
         {% block pretitle %}{% endblock %}
         {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
         {% block content %}
@@ -44,8 +58,9 @@
     {% block footer %}<div id="footer">
    
     </div>{% endblock %}
-</div>
-<!-- END Container -->
 
+<!-- END Container -->
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="{{ STATIC_URL }}/js/bootstrap.min.js"></script>
 </body>
 </html>
