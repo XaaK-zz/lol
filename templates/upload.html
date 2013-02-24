@@ -13,39 +13,6 @@
 
 {% block content %}
 
-<script type="text/javascript">
-$(document).ready(function(){
-    $('#import_gist').click(function(){ 
-        code_box = $("textarea[name='code']");
-        description_box = $("input[name='description']");
-        language_box = $("select[name='language_id']");
-        gist_id = $("input[name='gist_id']").val();
-        url = "https://api.github.com/gists/" + gist_id;
-        $.ajax({ 
-            url      : url, 
-            dataType : 'jsonp', 
-            timeout  : 10000,
-            success: function(response) {
-                description_box.val(response['description']);
-                for (file in response.data.files) {
-                    if (response.data.files.hasOwnProperty(file)) {
-                        var lang = response.data.files[file].language.trim();
-                        if(lang){
-                            var value = $("select option").filter(function() {
-                                  return $(this).text() === lang;
-                            }).first().attr("value");
-                            language_box.val(value);
-                        }
-                        code_box.val(response.data.files[file].content);
-                    }
-                }
-            }
-        }); 
-    });
-});
-
-</script>
-
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <form action="{% url upload %}" method="post" class="form-horizontal">
 {% csrf_token %}
@@ -68,9 +35,9 @@ $(document).ready(function(){
                 <div class="control-group">
                     <div class="controls">
                         <select name="language_id">
-    {% for language in languages %}
+                            {% for language in languages %}
                             <option value="{{ language.id }}">{{ language.name }}</option>
-    {% endfor %}
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
@@ -92,6 +59,41 @@ $(document).ready(function(){
     </div>
 </form>
 
-
 {% endblock %}
 
+
+
+{% block eofjavascript %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#import_gist').click(function(){ 
+        code_box = $("textarea[name='code']");
+        description_box = $("input[name='description']");
+        language_box = $("select[name='language_id']");
+        gist_id = $("input[name='gist_id']").val();
+        url = "https://api.github.com/gists/" + gist_id;
+        $.ajax({ 
+            url      : url, 
+            dataType : 'jsonp', 
+            timeout  : 10000,
+            success: function(response) {
+                description_box.val(response['description']);
+                for (file in response.data.files) {
+                    if (response.data.files.hasOwnProperty(file)) {
+                        var lang = response.data.files[file].language;
+                        if(lang){
+                            var value = $("select option").filter(function() {
+                                  return $(this).text() === lang;
+                            }).first().attr("value");
+                            language_box.val(value);
+                        }
+                        code_box.val(response.data.files[file].content);
+                    }
+                }
+            }
+        }); 
+    });
+});
+</script>
+
+{% endblock %}
