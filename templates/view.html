@@ -2,16 +2,39 @@
 
 {% block title %}Leet or Lame{% endblock %}
 
+{% block branding %}
+<div class="mainHeader">
+    <h1 id="site-name">Leet or Lame</h1>
+</div>
+{% endblock %}
+ 
 {% block content %}
-{% if snippet %}
-<div class="description">{{ snippet.description}}</div>
-<pre class="prettyprint">{{ snippet.code }}</pre>
-<div class="score">This snippets score is {{ snippet.score }} </div>
-{% else %}
-    <p>No snippets are available.</p>
-{% endif %}
-
-<a href="{% url upload %}">Add yours!</a>
-
+<div class="container">
+    
+    <div class="row-fluid">
+        <div class="span3">
+        </div>
+        <div class="span6">  
+            <div class="description">{{ snippet.description}}</div>
+        </div>
+    </div>
+     <div class="row-fluid">
+        <div class="span3">
+        </div>
+                    <div class="span6">
+                        <pre class="prettyprint">{{ snippet.code }}</pre>
+                    </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span4"></div>
+        <div class="score">This snippets score is {{ snippet.score }} </div>
+    </div>
+    <br>
+    <div class="row-fluid">    
+        <div class="span3"></div>
+        <div class="span6">
+            <a href="{% url view snippet.id %}">This snippets score</a>
+        </div>
+    </div>
 {% endblock %}
 
