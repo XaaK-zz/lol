@@ -3,16 +3,10 @@
 {% block title %}Leet or Lame{% endblock %}
 {% load staticfiles %}
 
-{% block extrastyle %}
-<link href="{% static 'css/prettify.css' %}" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
-
-{% endblock %}
-
 {% block active_random %}active{% endblock %}
 {% block onload %}onload="prettyPrint()"{% endblock %}
 
-{% block scripts %}
+{% block eofjavascript %}
 
 <script type="text/javascript" src="{% static 'js/lang-css.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/lang-go.js' %}"></script>
@@ -64,7 +58,7 @@
     <div class="row-fluid">    
         <div class="span3"></div>
         <div class="span6">
-            <a href="{% url view snippet.id %}">This snippets score</a>
+            <a href="{% url view snippet.id %}">See this snippets score</a>
         </div>
     </div>
 {% endblock %}

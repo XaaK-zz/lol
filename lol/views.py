@@ -22,20 +22,25 @@ def index(request):
 
 def upload(request):
     if request.method == 'GET':
-        languages = Language.objects.all().order_by('name')
+        languages = Language.objects.all().extra(select={'lower_name': 'lower(name)'}).order_by('lower_name')
         return render_to_response('upload.html', {'languages': languages}, context_instance=RequestContext(request))
     elif request.method == 'POST':
         lang = get_object_or_404(Language, pk=request.POST['language_id'])
-        s = Snippet(code=request.POST['code'], description=request.POST['description'], gist_id=request.POST['gist_id'], language=lang)
+        gist_id = request.POST['gist_id']
+        if(gist_id):
+            s = Snippet(code=request.POST['code'], description=request.POST['description'], gist_id=gist_id, language=lang)
+        else:
+            s = Snippet(code=request.POST['code'], description=request.POST['description'], language=lang)
         s.save()
         return redirect('index')
 
 def top(request, limit):
     limit = int(limit)
     top = sorted(Snippet.objects.all(), key=lambda a: a.score, reverse=True)[:limit]
-    return render_to_response('top.html', {'top': top, 'limit': limit}, context_instance=RequestContext(request))
+    return render_to_response('top.html', {'top': top, 'limit': limit})
 
 def view(request, snippet_id):
     snippet = get_object_or_404(Snippet, pk=snippet_id)
-    return render_to_response('view.html', {'snippet': snippet},context_instance=RequestContext(request))
+    return render_to_response('view.html', {'snippet': snippet})
+
 
