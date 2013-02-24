@@ -1,13 +1,6 @@
 {% extends "base.html" %}
 
 {% block title %}Leet or Lame{% endblock %}
-{% load staticfiles %}
-
-{% block extrastyle %}
-<link href="{% static 'css/prettify.css' %}" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
- 
-{% endblock %}
 
 {% block active_random %}active{% endblock %}
 
@@ -36,7 +29,7 @@
     </div>
     <div class="row-fluid">
         <div class="span4"></div>
-        <form action="/rate/{{ snippet.id }}/" method="post">
+        <form action="{% url index %}" method="post">
             {% csrf_token %}
             <div class="span1">
                 <input type="submit" name="submitButton" value="Leet" />

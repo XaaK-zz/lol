@@ -1,12 +1,6 @@
 {% extends "base.html" %}
 
 {% block title %} Top {{ limit }} Snippets {% endblock %}
-{% load staticfiles %}
-
-{% block extrastyle %}
-<link href="{% static 'css/prettify.css' %}" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
-{% endblock %}
 
 {% block active_top %}active{% endblock %}
 
