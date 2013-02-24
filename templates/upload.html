@@ -77,7 +77,10 @@ $(document).ready(function(){
             dataType : 'jsonp', 
             timeout  : 10000,
             success: function(response) {
-                description_box.val(response['description']);
+                console.log(response);
+                if(response.data['description']){
+                    description_box.val(response.data['description']);
+                }
                 for (file in response.data.files) {
                     if (response.data.files.hasOwnProperty(file)) {
                         var lang = response.data.files[file].language;
