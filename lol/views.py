@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template import Context, loader, RequestContext
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from lol.models import Snippet, Language
+from django.db.models import Avg, Count, Sum
 
 def index(request):
     if request.method == 'GET':
@@ -41,6 +42,17 @@ def top(request, limit):
 
 def view(request, snippet_id):
     snippet = get_object_or_404(Snippet, pk=snippet_id)
-    return render_to_response('view.html', {'snippet': snippet})
+    score = bayesian_average(snippet)
+    return render_to_response('view.html', {'snippet': snippet, 'score': score})
 
+def bayesian_average(snippet):
+    #http://blog.linkibol.com/2010/05/07/how-to-build-a-popularity-algorithm-you-can-be-proud-of/
+    #br = ( (avg_num_votes * avg_rating) + (this_num_votes * this_rating) ) / (avg_num_votes + this_num_votes)
+    #1. Someone should check my math; 2. This looks expensive as hell
+    sall = Snippet.objects.all()
+    avg_rating = sall.aggregate(Avg('leet')).values()[0]
+    avg_num_votes = (sall.aggregate(Sum('leet')).values()[0] + sall.aggregate(Sum('lame')).values()[0]) / len(sall)
+    this_num_votes = snippet.leet + snippet.lame
+    this_rating = snippet.leet
+    return ( (avg_num_votes * avg_rating) + (this_num_votes * this_rating) ) / (avg_num_votes + this_num_votes)
 
