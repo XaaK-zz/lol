@@ -33,7 +33,7 @@ def upload(request):
         else:
             s = Snippet(code=request.POST['code'], description=request.POST['description'], language=lang)
         s.save()
-        return redirect('index')
+        return redirect('view', snippet_id=s.id)
 
 def top(request, limit):
     limit = int(limit)
