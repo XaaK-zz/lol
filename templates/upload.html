@@ -23,16 +23,18 @@
                 <div class="control-group">
                     <label class="control-label" for="inputDescription">Description:</label>
                     <div class="controls">
-                        <input type="text" name="description" id="inputDescription" class="input-block-level"/>
+                        <input type="text" name="description" id="inputDescription" class="input-block-level" required/>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label" for="inputCode">Code:</label>
-                    <div class="controls">
-                        <textarea name="code" rows="10" id="inputCode" class="input-block-level"></textarea>
-                     </div>
+		    <div class="controls">
+                        <textarea name="code" rows="10" id="inputCode" class="input-block-level" required></textarea>
+			<p>You have <span id="counter">25</span> lines left.</p>
+		    </div>
                 </div>
                 <div class="control-group">
+		    <label class="control-label" for="language_id">Language:</label>
                     <div class="controls">
                         <select name="language_id">
                             {% for language in languages %}
@@ -64,6 +66,8 @@
 
 
 {% block eofjavascript %}
+<!-- Textarea count from https://bitbucket.org/MostThingsWeb/textarea-line-count/wiki/Home -->
+<script type="text/javascript" src="{% static 'js/jquery.TextareaLineCount.1.4.1.min.js' %}"></script>
 <script type="text/javascript">
 $(document).ready(function(){
     $('#import_gist').click(function(){ 
@@ -97,6 +101,19 @@ $(document).ready(function(){
         }); 
     });
 });
+
+$(document).ready(function(){
+    $('#inputCode').bind('input propertychange', function() {
+	var result = $.countLines("#inputCode");
+	if(result.actual == 1 && $('#inputCode').val() == '') {
+	    $('#counter').text(25);
+	}
+	else {
+	    $('#counter').text(25 - result.actual);
+	}
+    })
+});
+
 </script>
 
 {% endblock %}
