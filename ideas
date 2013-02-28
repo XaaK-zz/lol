@@ -2,4 +2,3 @@ improvements to gist integration (multiple files)
 export to gist ("Fork and improve!"/ "Think you can do better?")
 twitter or github oauth integration
 Support pulling description from python docstring, javadoc, Doxygen, etc 
-bayesian average
