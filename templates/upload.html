@@ -73,9 +73,9 @@
 <script type="text/javascript">
 $(document).ready(function(){
     $('#import_gist').click(function(){ 
-        code_box = $("textarea[name='code']");
+        code_box = $("textarea[name='inputCode']");
         description_box = $("input[name='description']");
-        language_box = $("select[name='language_id']");
+        language_box = $("select[name='language']");
         gist_id = $("input[name='gist_id']").val();
         url = "https://api.github.com/gists/" + gist_id;
         $.ajax({ 
@@ -83,7 +83,6 @@ $(document).ready(function(){
             dataType : 'jsonp', 
             timeout  : 10000,
             success: function(response) {
-                console.log(response);
                 if(response.data['description']){
                     description_box.val(response.data['description']);
                 }
