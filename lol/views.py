@@ -1,9 +1,11 @@
 # Create your views here.
 from django.http import HttpResponse
 from django.template import Context, loader, RequestContext
-from django.shortcuts import render_to_response, get_object_or_404, redirect
+from django.shortcuts import render, render_to_response, get_object_or_404, redirect
 from lol.models import Snippet, Language
 from django.db.models import Avg, Count, Sum
+from django.core.exceptions import ValidationError
+from lol.forms import UploadForm
 
 def index(request):
     if request.method == 'GET':
@@ -23,17 +25,27 @@ def index(request):
 
 def upload(request):
     if request.method == 'GET':
-        languages = Language.objects.all().extra(select={'lower_name': 'lower(name)'}).order_by('lower_name')
-        return render_to_response('upload.html', {'languages': languages}, context_instance=RequestContext(request))
+        form = UploadForm() 
+        return render(request, 'upload.html', {
+            'form': form
+        })
     elif request.method == 'POST':
-        lang = get_object_or_404(Language, pk=request.POST['language_id'])
-        gist_id = request.POST['gist_id']
-        if(gist_id):
-            s = Snippet(code=request.POST['code'], description=request.POST['description'], gist_id=gist_id, language=lang)
+        form = UploadForm(request.POST) # A form bound to the POST data
+        if form.is_valid():
+            desc = form.cleaned_data['description']
+            formCode = form.cleaned_data['inputCode']
+            lang = form.cleaned_data['language']
+            gistId = form.cleaned_data['gist_id']
+            if(gistId):
+                s = Snippet(code=formCode, description=desc, gist_id=gistId, language=lang)
+            else:
+                s = Snippet(code=formCode, description=desc, language=lang)
+            s.save()
+            return redirect('view', snippet_id=s.id)
         else:
-            s = Snippet(code=request.POST['code'], description=request.POST['description'], language=lang)
-        s.save()
-        return redirect('view', snippet_id=s.id)
+            return render(request, 'upload.html', {
+                'form': form
+            })
 
 def top(request, limit):
     limit = int(limit)

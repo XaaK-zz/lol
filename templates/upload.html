@@ -14,39 +14,43 @@
 {% block content %}
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
 <form action="{% url upload %}" method="post" class="form-horizontal">
 {% csrf_token %}
+    {{ form.non_field_errors }}
     <div class="container">
         <div class="row">
             <div class="span1"></div>
             <div class="span9">
-                <div class="control-group">
-                    <label class="control-label" for="inputDescription">Description:</label>
+                <div class="control-group {% if form.description.errors %}error{% endif %}">
+                    <label class="control-label" for="id_description">Description:</label>
                     <div class="controls">
-                        <input type="text" name="description" id="inputDescription" class="input-block-level"/>
+			{{ form.description }}
                     </div>
+		    <span class="help-inline">{{ form.description.errors }}</span>
                 </div>
-                <div class="control-group">
+                <div class="control-group {% if form.inputCode.errors %}error{% endif %}">
                     <label class="control-label" for="inputCode">Code:</label>
-                    <div class="controls">
-                        <textarea name="code" rows="10" id="inputCode" class="input-block-level"></textarea>
-                     </div>
+		    <div class="controls">
+			{{ form.inputCode }}
+                        <p>You have <span id="counter">25</span> lines left.</p>
+			 <span class="help-inline">{{ form.inputCode.errors }}</span>
+		    </div>
                 </div>
-                <div class="control-group">
+                <div class="control-group {% if form.language.errors %}error{% endif %}">
+		    <label class="control-label" for="language_id">Language:</label>
                     <div class="controls">
-                        <select name="language_id">
-                            {% for language in languages %}
-                            <option value="{{ language.id }}">{{ language.name }}</option>
-                            {% endfor %}
-                        </select>
+			{{ form.language }}
                     </div>
+		    <span class="help-inline">{{ form.language.errors }}</span>
                 </div>
-		<div class="control-group">
+		<div class="control-group {% if form.gist_id.errors %}error{% endif %}">
 			<label class="control-label" for="gistId">Import gist by id:</label>
 			<div class="controls">
-				<input type="text" name="gist_id" id="gist_id" />
+				{{ form.gist_id }}
 				<button type='button' id="import_gist">Import</button>
 			</div>
+			<span class="help-inline">{{ form.gist_id.errors }}</span>
 		</div>
             </div>
         </div>
@@ -64,6 +68,8 @@
 
 
 {% block eofjavascript %}
+<!-- Textarea count from https://bitbucket.org/MostThingsWeb/textarea-line-count/wiki/Home -->
+<script type="text/javascript" src="{% static 'js/jquery.TextareaLineCount.1.4.1.min.js' %}"></script>
 <script type="text/javascript">
 $(document).ready(function(){
     $('#import_gist').click(function(){ 
@@ -97,6 +103,22 @@ $(document).ready(function(){
         }); 
     });
 });
+
+$(document).ready(function(){
+    $('#id_inputCode').bind('input propertychange', monitorLines);
+    monitorLines();
+});
+
+function monitorLines() {
+    var result = $.countLines("#id_inputCode");
+    if(result.actual == 1 && $('#id_inputCode').val() == '') {
+	$('#counter').text(25);
+    }
+    else {
+	$('#counter').text(25 - result.actual);
+    }
+}
+
 </script>
 
 {% endblock %}
