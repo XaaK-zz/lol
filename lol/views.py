@@ -42,6 +42,10 @@ def upload(request):
                 s = Snippet(code=formCode, description=desc, language=lang)
             s.save()
             return redirect('view', snippet_id=s.id)
+        else:
+            return render(request, 'upload.html', {
+                'form': form
+            })
 
 def top(request, limit):
     limit = int(limit)
