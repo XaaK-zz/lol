@@ -1,20 +1,20 @@
 from django.db import models
-
-# Create your models here.
+        
 class Language(models.Model):
-    name = models.CharField(max_length=200)
-    language_class = models.CharField(max_length=200)
+    name            = models.CharField(max_length=200)
+    language_class  = models.CharField(max_length=200)
+    
     def __unicode__(self):
         return u'%s' % (self.name)
 
 class Snippet(models.Model):
     description = models.CharField(max_length=200)
-    code = models.TextField()
-    language = models.ForeignKey(Language)
-    parent = models.ForeignKey('self', null=True)
-    leet = models.IntegerField(default=0)
-    lame = models.IntegerField(default=0)
-    gist_id = models.IntegerField(default=0)
+    code        = models.TextField(max_length=1000)
+    language    = models.ForeignKey(Language)
+    parent      = models.ForeignKey('self', null=True)
+    leet        = models.IntegerField(default=0)
+    lame        = models.IntegerField(default=0)
+    gist_id     = models.IntegerField(default=0,null=True)
     
     def __unicode__(self):
         return u'%s' % (self.description)
