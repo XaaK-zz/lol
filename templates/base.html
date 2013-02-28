@@ -15,7 +15,7 @@
 </head>
 
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" {% block onload %}{% endblock %}>
-
+<div id="wrap">
 <!-- Container -->
 {% load tags %}
     <!-- Header -->
@@ -51,12 +51,26 @@
         {{ content }}
         {% endblock %}
         {% block sidebar %}{% endblock %}
-        <br class="clear" />
+
+         
     </div>
+    <div id="push"></div>
+</div>
+</div>
     <!-- END Content -->
 
-    {% block footer %}<div id="footer">
-   
+    {% block footer %}
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="span5">
+                    <small>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">Creative <br>Commons Attribution 3.0 United States License</a>.</small>
+                </div>
+                <div class="span2 offset5">
+                    <small><a href="mailto:contact@leetorlame.com">Contact Us</a></small>
+                </div>
+            </div>
+        </div>
     </div>{% endblock %}
 
 <!-- END Container -->
