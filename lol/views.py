@@ -66,6 +66,5 @@ def bayesian_average(snippet):
     avg_num_votes = (sall.aggregate(Sum('leet')).values()[0] + sall.aggregate(Sum('lame')).values()[0]) / len(sall)
     this_num_votes = snippet.leet + snippet.lame
     this_rating = snippet.leet
-    return 0
-    #return ( (avg_num_votes * avg_rating) + (this_num_votes * this_rating) ) / (avg_num_votes + this_num_votes)
+    return ( (avg_num_votes * avg_rating) + (this_num_votes * this_rating) ) / (avg_num_votes + this_num_votes)
 

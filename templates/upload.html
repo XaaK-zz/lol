@@ -5,7 +5,7 @@
 
 {% block branding %}
 <div class="mainHeader">
- <!--   <h1 id="site-name">Leet or Lame</h1> -->
+    <h1 id="site-name">Leet or Lame</h1>
 </div>
 {% endblock %}
 
@@ -27,7 +27,7 @@
                     <div class="controls">
 			{{ form.description }}
                     </div>
-		    {{ form.description.errors }}
+		    <span class="help-inline">{{ form.description.errors }}</span>
                 </div>
                 <div class="control-group {% if form.inputCode.errors %}error{% endif %}">
                     <label class="control-label" for="inputCode">Code:</label>
@@ -42,7 +42,7 @@
                     <div class="controls">
 			{{ form.language }}
                     </div>
-		    {{ form.language.errors }}
+		    <span class="help-inline">{{ form.language.errors }}</span>
                 </div>
 		<div class="control-group {% if form.gist_id.errors %}error{% endif %}">
 			<label class="control-label" for="gistId">Import gist by id:</label>
@@ -50,7 +50,7 @@
 				{{ form.gist_id }}
 				<button type='button' id="import_gist">Import</button>
 			</div>
-			{{ form.gist_id.errors }}
+			<span class="help-inline">{{ form.gist_id.errors }}</span>
 		</div>
             </div>
         </div>
