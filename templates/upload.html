@@ -27,14 +27,18 @@
                     <div class="controls">
 			{{ form.description }}
                     </div>
+		    {% if form.description.errors %}
 		    <span class="help-inline">{{ form.description.errors }}</span>
+		    {% endif %}
                 </div>
                 <div class="control-group {% if form.inputCode.errors %}error{% endif %}">
                     <label class="control-label" for="inputCode">Code:</label>
 		    <div class="controls">
 			{{ form.inputCode }}
                         <p>You have <span id="counter">25</span> lines left.</p>
-			 <span class="help-inline">{{ form.inputCode.errors }}</span>
+			{% if form.inputCode.errors %}
+			<span class="help-inline">{{ form.inputCode.errors }}</span>
+			{% endif %}
 		    </div>
                 </div>
                 <div class="control-group {% if form.language.errors %}error{% endif %}">
@@ -42,7 +46,9 @@
                     <div class="controls">
 			{{ form.language }}
                     </div>
+		    {% if form.language.errors %}
 		    <span class="help-inline">{{ form.language.errors }}</span>
+		    {% endif %}
                 </div>
 		<div class="control-group {% if form.gist_id.errors %}error{% endif %}">
 			<label class="control-label" for="gistId">Import gist by id:</label>
@@ -50,7 +56,9 @@
 				{{ form.gist_id }}
 				<button type='button' id="import_gist">Import</button>
 			</div>
+			{% if form.gist_id.errors %}
 			<span class="help-inline">{{ form.gist_id.errors }}</span>
+			{% endif %}
 		</div>
             </div>
         </div>

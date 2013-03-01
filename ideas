@@ -5,5 +5,7 @@ Support pulling description from python docstring, javadoc, Doxygen, etc
 Hash of code stored with snippet - compare upon insert
 First time (via cookie) detection - show user bootstrap popup with simple explanation of site
 Not all languages are rendering correctly still - need to ensure all working
-"Share to twitter" button
 Ability to get random LoLs in specific languages
+Ada should not be the default language
+Google analytics
+Approval process for uploads to combat spam?  or maybe captcha?
