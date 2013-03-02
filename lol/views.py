@@ -39,7 +39,14 @@ def upload(request):
                 s = Snippet(code=formCode, description=desc, gist_id=gistId, language=lang)
             else:
                 s = Snippet(code=formCode, description=desc, language=lang)
-            s.save()
+            if s.validate():
+                print("validate successful")
+                s.save()
+            else:
+                print("validate failed")
+                return render(request, 'upload.html', {
+                    'form': form
+                })
             return redirect('view', snippet_id=s.id)
         else:
             return render(request, 'upload.html', {
