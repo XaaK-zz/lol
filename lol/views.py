@@ -24,7 +24,8 @@ def index(request):
 
 def upload(request):
     if request.method == 'GET':
-        form = UploadForm()
+        default_lang = Language.objects.get(name='Python')
+        form = UploadForm(initial = {'language': default_lang.pk})
         return render(request, 'upload.html', {
             'form': form
         })
