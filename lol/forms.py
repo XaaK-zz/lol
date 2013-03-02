@@ -17,5 +17,6 @@ class UploadForm(forms.Form):
     inputCode = forms.CharField(widget=forms.Textarea(attrs={"rows":"10","class":"input-block-level"}),
                                 validators=[validate_code],
                                 max_length=1000)
-    language = forms.ModelChoiceField(queryset=Language.objects.all().extra(select={'lower_name': 'lower(name)'}).order_by('lower_name'), empty_label=None)
+    language = forms.ModelChoiceField(queryset=Language.objects.all().extra(select={'lower_name': 'lower(name)'}).order_by('lower_name'),
+                                      empty_label="Select a language...")
     gist_id = forms.IntegerField(required=False)
