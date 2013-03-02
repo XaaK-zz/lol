@@ -29,23 +29,23 @@ def upload(request):
             'form': form
         })
     elif request.method == 'POST':
-        form = UploadForm(request.POST) # A form bound to the POST data
+        form = UploadForm(request.POST) 
         if form.is_valid():
             desc = form.cleaned_data['description']
             formCode = form.cleaned_data['inputCode']
             lang = form.cleaned_data['language']
             gistId = form.cleaned_data['gist_id']
             if(gistId):
-                s = Snippet(code=formCode, description=desc, gist_id=gistId, language=lang)
+                s = Snippet(code=formCode.strip(), description=desc.strip(), gist_id=gistId, language=lang)
             else:
-                s = Snippet(code=formCode, description=desc, language=lang)
+                s = Snippet(code=formCode.strip(), description=desc.strip(), language=lang)
             if s.validate():
-                print("validate successful")
                 s.save()
             else:
-                print("validate failed")
                 return render(request, 'upload.html', {
-                    'form': form
+                    'form':                form,
+                    'error_message':       "Looks like we already have that code in our system." ,
+                    'error_message_title': "Oops sorry!"
                 })
             return redirect('view', snippet_id=s.id)
         else:
