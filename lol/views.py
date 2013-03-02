@@ -55,3 +55,8 @@ def view(request, snippet_id):
     snippet = get_object_or_404(Snippet, pk=snippet_id)
     return render_to_response('view.html', {'snippet': snippet})
 
+def bylang(request, language_name):
+    lang = get_object_or_404(Language, name=language_name)
+    snippet = Snippet.objects.filter(language=lang).order_by('?')[0]
+    return render_to_response('index.html', {'snippet': snippet})
+
