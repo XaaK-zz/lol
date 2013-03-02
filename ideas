@@ -4,7 +4,7 @@ twitter or github oauth integration
 Support pulling description from python docstring, javadoc, Doxygen, etc 
 First time (via cookie) detection - show user bootstrap popup with simple explanation of site
 Not all languages are rendering correctly still - need to ensure all working
-Ability to get random LoLs in specific languages
 Google analytics
 Approval process for uploads to combat spam?  or maybe captcha?
 Thank you page when upload new snippet
+Better buttons for leet/lame

@@ -5,4 +5,5 @@ urlpatterns = patterns('lol.views',
     url(r'^upload/$', 'upload', name='upload'),
     url(r'^top/(?P<limit>\d+)/$', 'top', name='top'),
     url(r'^view/(?P<snippet_id>\d+)/$', 'view', name='view'),
+    url(r'^bylang/(?P<language_name>\w+)/$', 'bylang', name='bylang'),
 )

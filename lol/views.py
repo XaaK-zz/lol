@@ -24,6 +24,8 @@ def index(request):
 
 def upload(request):
     if request.method == 'GET':
+        #default_lang = Language.objects.get(name='Python')
+        #form = UploadForm(initial = {'language': default_lang.pk})
         form = UploadForm()
         return render(request, 'upload.html', {
             'form': form
@@ -61,4 +63,9 @@ def top(request, limit):
 def view(request, snippet_id):
     snippet = get_object_or_404(Snippet, pk=snippet_id)
     return render_to_response('view.html', {'snippet': snippet})
+
+def bylang(request, language_name):
+    lang = get_object_or_404(Language, name=language_name)
+    snippet = Snippet.objects.filter(language=lang).order_by('?')[0]
+    return render_to_response('index.html', {'snippet': snippet})
 
