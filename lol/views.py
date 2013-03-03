@@ -9,7 +9,12 @@ from lol.forms import UploadForm
 def index(request):
     if request.method == 'GET':
         random = Snippet.objects.filter(approved=True).order_by('?')[0]
-        return render_to_response('index.html', {'snippet': random}, context_instance=RequestContext(request))
+        thanks = False
+        if request.session['thanks']:
+            request.session['thanks'] = False
+            thanks = True
+        return render_to_response('index.html', {'snippet': random, 'thanks': thanks},
+                                  context_instance=RequestContext(request))
     elif request.method == 'POST':
         bias = request.POST['submitButton']
         snippet_id = request.POST['snippet_id']
@@ -47,7 +52,8 @@ def upload(request):
                     'error_message':       "Looks like we already have that code in our system." ,
                     'error_message_title': "Oops sorry!"
                 })
-            return redirect('view', snippet_id=s.id)
+            request.session['thanks'] = True
+            return redirect('index')
         else:
             return render(request, 'upload.html', {
                 'form': form

@@ -25,10 +25,24 @@
  
 {% block content %}
 <div class="container">
-    
+    {% if thanks %}
+    <div class="container">
+        <div class="row">
+            <div class="span2"></div>
+            <div class="span8">
+                <div class="alert alert-success">
+                  <a href="#" class="close" data-dismiss="alert">&times;</a>
+                  Thanks for adding new code to the system.<br>
+                  Come back soon to vote for it!
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
     <div class="row-fluid">
         <div class="span2"></div>
-        <div class="span7">  
+        <div class="span8">  
             <div class="description">
                 <a href="{% url view snippet.id %}">
                     {{ snippet.description}}&nbsp;&nbsp;({{ snippet.language.name}})
