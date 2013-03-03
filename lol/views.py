@@ -61,8 +61,14 @@ def top(request, limit):
     return render_to_response('top.html', {'top': top, 'limit': limit})
 
 def view(request, snippet_id):
-    snippet = get_object_or_404(Snippet, pk=snippet_id)
-    return render_to_response('view.html', {'snippet': snippet})
+    snippetList = Snippet.objects.filter(pk=snippet_id)
+    if len(snippetList) == 1:
+        return render_to_response('view.html', {'snippet': snippetList[0]})
+    else:
+        return redirect('index')
+        
+    #snippet = get_object_or_404(Snippet, pk=snippet_id)
+    #return render_to_response('view.html', {'snippet': snippet})
 
 def bylang(request, language_name):
     lang = get_object_or_404(Language, name=language_name)
