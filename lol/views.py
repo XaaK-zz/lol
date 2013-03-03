@@ -8,8 +8,13 @@ from lol.forms import UploadForm
 
 def index(request):
     if request.method == 'GET':
-        random = Snippet.objects.order_by('?')[0]
-        return render_to_response('index.html', {'snippet': random}, context_instance=RequestContext(request))
+        random = Snippet.objects.filter(approved=True).order_by('?')[0]
+        thanks = False
+        if request.session['thanks']:
+            request.session['thanks'] = False
+            thanks = True
+        return render_to_response('index.html', {'snippet': random, 'thanks': thanks},
+                                  context_instance=RequestContext(request))
     elif request.method == 'POST':
         bias = request.POST['submitButton']
         snippet_id = request.POST['snippet_id']
@@ -24,8 +29,6 @@ def index(request):
 
 def upload(request):
     if request.method == 'GET':
-        #default_lang = Language.objects.get(name='Python')
-        #form = UploadForm(initial = {'language': default_lang.pk})
         form = UploadForm()
         return render(request, 'upload.html', {
             'form': form
@@ -49,7 +52,8 @@ def upload(request):
                     'error_message':       "Looks like we already have that code in our system." ,
                     'error_message_title': "Oops sorry!"
                 })
-            return redirect('view', snippet_id=s.id)
+            request.session['thanks'] = True
+            return redirect('index')
         else:
             return render(request, 'upload.html', {
                 'form': form
@@ -57,15 +61,18 @@ def upload(request):
 
 def top(request, limit):
     limit = int(limit)
-    top = sorted(Snippet.objects.all(), key=lambda a: a.score, reverse=True)[:limit]
+    top = sorted(Snippet.objects.filter(approved=True), key=lambda a: a.score, reverse=True)[:limit]
     return render_to_response('top.html', {'top': top, 'limit': limit})
 
 def view(request, snippet_id):
-    snippet = get_object_or_404(Snippet, pk=snippet_id)
-    return render_to_response('view.html', {'snippet': snippet})
+    snippetList = Snippet.objects.filter(pk=snippet_id).filter(approved=True)
+    if len(snippetList) == 1:
+        return render_to_response('view.html', {'snippet': snippetList[0]})
+    else:
+        return redirect('index')
 
 def bylang(request, language_name):
     lang = get_object_or_404(Language, name=language_name)
-    snippet = Snippet.objects.filter(language=lang).order_by('?')[0]
+    snippet = Snippet.objects.filter(language=lang).filter(approved=True).order_by('?')[0]
     return render_to_response('index.html', {'snippet': snippet})
 

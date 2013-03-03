@@ -17,6 +17,7 @@ class Snippet(models.Model):
     leet        = models.IntegerField(default=0)
     lame        = models.IntegerField(default=0)
     gist_id     = models.IntegerField(default=0,null=True)
+    approved    = models.BooleanField(default=False)
     
     def __unicode__(self):
         return u'%s' % (self.description)
