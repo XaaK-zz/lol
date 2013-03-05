@@ -10,7 +10,8 @@ def index(request):
     if request.method == 'GET':
         random = Snippet.objects.filter(approved=True).order_by('?')[0]
         thanks = False
-        if request.session['thanks']:
+        if request.session.get('thanks', False):
+        #if request.session['thanks']:
             request.session['thanks'] = False
             thanks = True
         return render_to_response('index.html', {'snippet': random, 'thanks': thanks},
