@@ -27,7 +27,7 @@
 </div>
 {% endif %}
 
-<form action="{% url upload %}" method="post" class="form-horizontal">
+<form action="{% url "upload" %}" method="post" class="form-horizontal">
 {% csrf_token %}
     {{ form.non_field_errors }}
     <div class="container">

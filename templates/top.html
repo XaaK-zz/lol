@@ -33,7 +33,7 @@
         <div class="span7">  
             <li> 
                 <div class="description">
-                    <a href="{% url view snippet.id %}">
+                    <a href="{% url "view" snippet.id %}">
                         {{ snippet.description}}&nbsp;&nbsp;({{ snippet.language.name}})
                     </a>
                     &nbsp;&nbsp;Leetness: {{ snippet.score }}
