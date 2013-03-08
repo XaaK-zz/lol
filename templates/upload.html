@@ -70,11 +70,36 @@
         </div>
         <div class="row">    
             <div class="span1 center">
-                <input type="submit" value="Submit"/>
+		<input type="submit" value="submit" id="btnSubmit" style="visibility:hidden"/>
+		<button type='button' id="btnPreview">Preview...</button>
             </div>
         </div>
     </div>
 </form>
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h3 id="myModalLabel">Preview your code:</h3>
+  </div>
+  <div class="modal-body">
+    <div class="row-fluid">
+        <div class="span8">  
+            <div class="description"><span id="uploadDesc"/>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+	<div class="span8">
+	    <pre class="prettyprint"><code class="" id="uploadCode"></code></pre>
+	</div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    <button class="btn btn-primary" id="btnSubmitPreview">Submit code</button>
+  </div>
+</div>
 
 {% endblock %}
 
@@ -113,6 +138,38 @@ $(document).ready(function(){
                 }
             }
         }); 
+    });
+});
+
+$(document).ready(function(){
+    $('#btnPreview').click(function(){ 
+        code_box = $('#id_inputCode');
+        description_box = $('#id_description');
+	language_box = $("#id_language");
+	language_box_selected = $("#id_language option:selected");
+	counter = $("#counter");
+	
+	if((description_box.val().trim() == "") ||
+	   (code_box.val().trim() == "") ||
+	   (parseInt(counter.val()) < 0) ||
+	   (language_box.prop("selectedIndex") == 0)) {
+	    
+	    //invalid
+	    $("#btnSubmit").click();
+	    return;
+	}
+	
+        $('#uploadDesc').text(" " + description_box.val() + " (" + language_box_selected.text() + ")");
+	$('#uploadCode').text(code_box.val());
+	//$('#uploadLang').text(language_box.text());
+	prettyPrint();
+	$('#myModal').modal('show');
+    });
+});
+
+$(document).ready(function(){
+    $('#btnSubmitPreview').click(function(){
+	$("#btnSubmit").click();
     });
 });
 
