@@ -13,12 +13,11 @@ class Snippet(models.Model):
     code        = models.TextField(max_length=1000)
     code_hash   = models.CharField(max_length=40, unique=True)
     language    = models.ForeignKey(Language)
-    parent      = models.ForeignKey('self', null=True)
     leet        = models.IntegerField(default=0)
     lame        = models.IntegerField(default=0)
-    gist_id     = models.IntegerField(default=0,null=True)
+    gist_id     = models.IntegerField(default=0,null=True,blank=True)
     approved    = models.BooleanField(default=False)
-    userName    = models.CharField(max_length=200)
+    userName    = models.CharField(max_length=200,null=True,blank=True)
     
     def __unicode__(self):
         return u'%s' % (self.description)

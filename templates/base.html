@@ -17,7 +17,8 @@
 </head>
 
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" {% block onload %}{% endblock %}>
-
+<div id="containerX">
+    <div id="headerX">
     <!-- Header -->
     <div class="navbar navbar-fixed-top" >
         <div class="navbar-inner">
@@ -35,9 +36,10 @@
             </ul>
         </div>
     </div>
-
+    </div>
     <!-- END Header -->
-    <br>
+     <div id="bodyX">
+        <div style="height:80px"></div>
     <!-- Content -->
     <div id="content">
         {% block pretitle %}{% endblock %}
@@ -50,13 +52,13 @@
 
          
     </div>
-    <div id="push"></div>
+</div>
 
 
     <!-- END Content -->
 
     {% block footer %}
-    <div id="footer" class="navbar-static-bottom">
+    <div id="footerX">
             <div class="row">
                 <div class="span5 offset1">
                     <small>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">Creative <br>Commons Attribution 3.0 United States License</a>.</small>
@@ -66,7 +68,7 @@
                 </div>
             </div>
     </div>{% endblock %}
-
+</div>
 <!-- END Container -->
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
