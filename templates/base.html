@@ -3,6 +3,7 @@
 <head>
 <title>{% block title %}{% endblock %}</title>
 {% load staticfiles %}
+{% load tags %}
 <link href="{% static 'css/prettify.css' %}" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="{% static 'js/prettify.js' %}"></script>
 {% block extrastyle %}{% endblock %}
@@ -16,35 +17,29 @@
 </head>
 
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" {% block onload %}{% endblock %}>
-<div id="wrap">
-<!-- Container -->
-{% load tags %}
+
     <!-- Header -->
-
-        <div class="navbar navbar-fixed-top" >
-          <div class="navbar-inner">
-            <div class="container">
-              <ul class="nav">
-                  <li class=""><a href="{% url "index" %}" class="titlebar">Leet or Lame</a></li>
-              </ul>
-            </div>
-          </div>
-        
-          <div class="navbar-inner">
-
-              <ul class="nav">
-                <li class="{% block active_random %}{% endblock %}"><a href="{% url "index" %}">Random</a></li>
-                <li class="{% block active_top %}{% endblock %}"><a href="{% url "top" 10 %}">Top 10</a></li>
-                <li class="{% block active_upload %}{% endblock %}"><a href="{% url "upload" %}">Add Yours!</a></li>
-              </ul>
-
+    <div class="navbar navbar-fixed-top" >
+        <div class="navbar-inner">
+          <div class="container">
+            <ul class="nav">
+                <li class=""><a href="{% url "index" %}" class="titlebar">Leet or Lame</a></li>
+            </ul>
           </div>
         </div>
+        <div class="navbar-inner">
+            <ul class="nav">
+              <li class="{% block active_random %}{% endblock %}"><a href="{% url "index" %}">Random</a></li>
+              <li class="{% block active_top %}{% endblock %}"><a href="{% url "top" 10 %}">Top 10</a></li>
+              <li class="{% block active_upload %}{% endblock %}"><a href="{% url "upload" %}">Add Yours!</a></li>
+            </ul>
+        </div>
+    </div>
 
     <!-- END Header -->
     <br>
     <!-- Content -->
-    <div id="content" style="padding-top:80px">
+    <div id="content">
         {% block pretitle %}{% endblock %}
         {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
         {% block content %}
@@ -56,22 +51,20 @@
          
     </div>
     <div id="push"></div>
-</div>
-</div>
+
+
     <!-- END Content -->
 
     {% block footer %}
-    <div id="footer">
-        <div class="container">
+    <div id="footer" class="navbar-static-bottom">
             <div class="row">
-                <div class="span5">
+                <div class="span5 offset1">
                     <small>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">Creative <br>Commons Attribution 3.0 United States License</a>.</small>
                 </div>
-                <div class="span1 offset6">
+                <div class="span1 offset5">
                     <nobr><small><a href="mailto:contact@leetorlame.com">Contact Us</a></small></nobr>
                 </div>
             </div>
-        </div>
     </div>{% endblock %}
 
 <!-- END Container -->

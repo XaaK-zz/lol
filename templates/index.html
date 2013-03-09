@@ -18,7 +18,7 @@
 {% endblock %}
  
 {% block content %}
-<div class="container">
+
     {% if thanks %}
     <div class="container">
         <div class="row">
@@ -36,27 +36,28 @@
 
     <div class="row-fluid">
         <div class="span2"></div>
-        <div class="span6">  
+        <div class="span6" style="margin-left:0px">  
             <div class="description">
                 {{ snippet.description}}&nbsp;&nbsp;({{ snippet.language.name}})<br>
-                Leetness: {{ snippet.score }}</div>
+                <small>Leetness: {{ snippet.score }}</small></div>
         </div>
         <div class="span2">
-            <br>&nbsp;Share this code
+            <br><div class="text-right"><a href="{% url "view" snippet.id %}">Share this code</a></div>
         </div>
     </div>
     <form action="{% url "index" %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="snippet_id" value="{{ snippet.id }}" />
         <div class="row-fluid">
-            <div class="span2" style="text-align:center">
-                <input type="submit" name="submitButton" value="Lame" class="lolButton" />
+            <div class="span2 pagination-centered">
+                    <button class="btn btn-danger btn-large" type="submit" value="Lame" name="submitButton" style="margin-left: auto;
+    margin-right: auto;">Lame</button>
             </div>
-            <div class="span8">
+            <div class="span8" style="margin-left:0px">
                 <pre class="prettyprint"><code class="{{ snippet.language.language_class}}">{{ snippet.code }}</code></pre>
             </div>
-            <div class="span2" style="text-align:center">
-                <input type="submit" name="submitButton" value="Leet" class="lolButton"/>
+            <div class="span2 pagination-centered" style="margin-left:0px">
+                    <button class="btn btn-success btn-large" type="submit" value="Leet" name="submitButton">&nbsp;Leet&nbsp;</button>
             </div>
         </div>
     </form>
