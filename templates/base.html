@@ -20,40 +20,31 @@
 <!-- Container -->
 {% load tags %}
     <!-- Header -->
-    <div id="header">
-         <div class="container">
-            <div class="masthead">
-              <div class="navbar">
-                <div class="navbar-inner">
-                  <div class="container">
-                    <ul class="nav">
-                        <li class=""><a href="{% url "index" %}" class="titlebar">Leet or Lame</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+
+        <div class="navbar navbar-fixed-top" >
+          <div class="navbar-inner">
+            <div class="container">
+              <ul class="nav">
+                  <li class=""><a href="{% url "index" %}" class="titlebar">Leet or Lame</a></li>
+              </ul>
             </div>
-         </div>
-        <div class="container">
-            <div class="masthead">
-              <div class="navbar">
-                <div class="navbar-inner">
-                  <div class="container">
-                    <ul class="nav">
-                      <li class="{% block active_random %}{% endblock %}"><a href="{% url "index" %}">Random</a></li>
-                      <li class="{% block active_top %}{% endblock %}"><a href="{% url "top" 10 %}">Top 10</a></li>
-                      <li class="{% block active_upload %}{% endblock %}"><a href="{% url "upload" %}">Add Yours!</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div><!-- /.navbar -->
-            </div>
+          </div>
+        
+          <div class="navbar-inner">
+
+              <ul class="nav">
+                <li class="{% block active_random %}{% endblock %}"><a href="{% url "index" %}">Random</a></li>
+                <li class="{% block active_top %}{% endblock %}"><a href="{% url "top" 10 %}">Top 10</a></li>
+                <li class="{% block active_upload %}{% endblock %}"><a href="{% url "upload" %}">Add Yours!</a></li>
+              </ul>
+
+          </div>
         </div>
-    </div>
+
     <!-- END Header -->
     <br>
     <!-- Content -->
-    <div id="content">
+    <div id="content" style="padding-top:80px">
         {% block pretitle %}{% endblock %}
         {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
         {% block content %}

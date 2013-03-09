@@ -36,12 +36,13 @@
 
     <div class="row-fluid">
         <div class="span2"></div>
-        <div class="span8">  
+        <div class="span6">  
             <div class="description">
-                <a href="{% url "view" snippet.id %}">
-                    {{ snippet.description}}&nbsp;&nbsp;({{ snippet.language.name}})
-                </a>
-            </div>
+                {{ snippet.description}}&nbsp;&nbsp;({{ snippet.language.name}})<br>
+                Leetness: {{ snippet.score }}</div>
+        </div>
+        <div class="span2">
+            <br>&nbsp;Share this code
         </div>
     </div>
     <form action="{% url "index" %}" method="post">
