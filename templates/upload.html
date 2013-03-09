@@ -56,6 +56,15 @@
 			{% endif %}
                     </div>
 		</div>
+		<div class="control-group {% if form.userName.errors %}error{% endif %}">
+		    <label class="control-label" for="userName_id">Your name (optional):</label>
+                    <div class="controls">
+			{{ form.userName }}
+			{% if form.userName.errors %}
+			<span class="help-inline">{{ form.userName.errors }}</span>
+			{% endif %}
+                    </div>
+		</div>
 		<div class="control-group {% if form.gist_id.errors %}error{% endif %}">
 			<label class="control-label" for="gistId">Import gist by id:</label>
 			<div class="controls">

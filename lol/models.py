@@ -18,6 +18,7 @@ class Snippet(models.Model):
     lame        = models.IntegerField(default=0)
     gist_id     = models.IntegerField(default=0,null=True)
     approved    = models.BooleanField(default=False)
+    userName    = models.CharField(max_length=200)
     
     def __unicode__(self):
         return u'%s' % (self.description)

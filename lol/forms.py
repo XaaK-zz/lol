@@ -19,6 +19,8 @@ class UploadForm(forms.Form):
                                 max_length=1000)
     language = forms.ModelChoiceField(queryset=Language.objects.all().extra(select={'lower_name': 'lower(name)'}).order_by('lower_name'),
                                       empty_label="Select a language...")
+    userName = forms.CharField(max_length=200)
+    
     gist_id = forms.IntegerField(required=False)
     
     
