@@ -18,9 +18,9 @@ class Snippet(models.Model):
     lame        = models.IntegerField(default=0)
     gist_id     = models.IntegerField(default=0,null=True,blank=True)
     approved    = models.BooleanField(default=False)
-    userName    = models.CharField(max_length=200,null=True,blank=True)
+    userName    = models.CharField(max_length=200,null=True,blank=True, default="Anonymous")
     submitDate  = models.DateTimeField(auto_now=True, default=datetime.now())
-    
+
     def __unicode__(self):
         return u'%s' % (self.description)
 

@@ -41,7 +41,7 @@
                     <label class="control-label" for="inputCode">Code:</label>
 		    <div class="controls">
 			{{ form.inputCode }}
-                        <div class="lineCounter">You have <span id="counter">25</span> lines left.</div>
+                        <small><div class="lineCounter pull-right">You have <span id="counter">25</span> lines left.</div></small>
 			{% if form.inputCode.errors %}
 			<span class="help-inline">{{ form.inputCode.errors }}</span>
 			{% endif %}
@@ -93,13 +93,13 @@
   </div>
   <div class="modal-body">
     <div class="row-fluid">
-        <div class="span8">  
+        <div class="span12">  
             <div class="description"><span id="uploadDesc"/>
             </div>
         </div>
     </div>
     <div class="row-fluid">
-	<div class="span8">
+	<div class="span12">
 	    <pre class="prettyprint"><code class="" id="uploadCode"></code></pre>
 	</div>
     </div>

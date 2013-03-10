@@ -69,14 +69,24 @@ body {
     background-color:rgb(220,220,220);
 }
 
-@media (min-width: 980px) {
+@media (min-width: 780px) {
   body {
     padding-top: 80px;
   }
 }
 
 
+@media (max-width: 979px) {
+  .spacer {
+    height:0px;
+    }
+}
 
+@media (min-width: 980px) {
+  .spacer {
+    height:83px;
+    }
+}
 
 
 
