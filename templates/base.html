@@ -19,40 +19,50 @@
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" {% block onload %}{% endblock %}>
 <div id="containerX">
     <div id="headerX">
-    <!-- Header -->
-    <div class="navbar navbar-fixed-top" >
-        <div class="navbar-inner">
-          <div class="container">
-            <ul class="nav">
-                <li class=""><a href="{% url "index" %}" class="titlebar">Leet or Lame</a></li>
-            </ul>
-          </div>
+        <div class="navbar navbar-fixed-top" >
+            <div class="navbar-inner">
+              <div class="container">
+                <ul class="nav">
+                    <li class="headerCell"><a href="{% url "index" %}" class="titlebar pull-center">Leet or Lame</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="navbar-inner">
+                <ul class="nav">
+                    <li class="headerCell dropdown pull-right {% block active_random %}{% endblock %}">
+                    <!-- <a href="{% url "index" %}">Random</a> -->
+                          <a id="drop1" href="" role="button" class="dropdown-toggle" data-toggle="dropdown">Random<b class="caret"></b></a>
+                          
+                          <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url "index" %}">Any</a></li>
+                            <li role="presentation" class="divider"></li>
+                            {% for language in languages %}
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url "bylang" language.id %}">{{ language.name }}</a></li>
+                            {% endfor %}
+                          </ul>
+                        </li>
+                    <li class="headerCell {% block active_top %}{% endblock %}"><a href="{% url "top" 10 %}">Top 10</a></li>
+                    <li class="headerCell {% block active_upload %}{% endblock %}"><a href="{% url "upload" %}">Add Yours!</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="navbar-inner">
-            <ul class="nav">
-              <li class="{% block active_random %}{% endblock %}"><a href="{% url "index" %}">Random</a></li>
-              <li class="{% block active_top %}{% endblock %}"><a href="{% url "top" 10 %}">Top 10</a></li>
-              <li class="{% block active_upload %}{% endblock %}"><a href="{% url "upload" %}">Add Yours!</a></li>
-            </ul>
-        </div>
-    </div>
     </div>
     <!-- END Header -->
      <div id="bodyX">
         <div class="spacer" ></div>
-    <!-- Content -->
-    <div id="content">
-        {% block pretitle %}{% endblock %}
-        {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
-        {% block content %}
-        {% block object-tools %}{% endblock %}
-        {{ content }}
-        {% endblock %}
-        {% block sidebar %}{% endblock %}
-
-         
+        <!-- Content -->
+        <div id="content">
+            {% block pretitle %}{% endblock %}
+            {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+            {% block content %}
+            {% block object-tools %}{% endblock %}
+            {{ content }}
+            {% endblock %}
+            {% block sidebar %}{% endblock %}
+    
+             
+        </div>
     </div>
-</div>
 
 
     <!-- END Content -->

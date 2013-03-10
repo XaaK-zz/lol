@@ -1,4 +1,5 @@
 from django.conf import settings # import the settings file
+from lol.models import Snippet, Language
 
 def tracking(request):
     if hasattr(settings, 'TRACKING_ENABLED'):
@@ -7,3 +8,6 @@ def tracking(request):
     else:
         return {'tracking_enabled': False,
                 'tracking_account': ""}
+        
+def languages(request):
+    return {'languages': Language.objects.all().extra(select={'lower_name': 'lower(name)'}).order_by('lower_name') }

@@ -73,8 +73,8 @@ def view(request, snippet_id):
     else:
         return redirect('index')
 
-def bylang(request, language_name):
-    lang = get_object_or_404(Language, name=language_name)
+def bylang(request, language_id):
+    lang = get_object_or_404(Language, pk=language_id)
     snippet = Snippet.objects.filter(language=lang).filter(approved=True).order_by('?')[0]
     return render_to_response('index.html', {'snippet': snippet},context_instance=RequestContext(request))
 
