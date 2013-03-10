@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 import hashlib
 
 class Language(models.Model):
@@ -18,6 +19,7 @@ class Snippet(models.Model):
     gist_id     = models.IntegerField(default=0,null=True,blank=True)
     approved    = models.BooleanField(default=False)
     userName    = models.CharField(max_length=200,null=True,blank=True)
+    submitDate  = models.DateTimeField(auto_now=True, default=datetime.now())
     
     def __unicode__(self):
         return u'%s' % (self.description)
