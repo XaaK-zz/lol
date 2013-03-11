@@ -1,10 +1,12 @@
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader, RequestContext
 from django.shortcuts import render, render_to_response, get_object_or_404, redirect
+from django.core.urlresolvers import reverse
 from lol.models import Snippet, Language
 from django.core.exceptions import ValidationError
 from lol.forms import UploadForm
+import json
 
 def index(request):
     if request.method == 'GET':
@@ -13,19 +15,23 @@ def index(request):
         if request.session.get('thanks', False):
             request.session['thanks'] = False
             thanks = True
-        return render_to_response('index.html', {'snippet': random, 'thanks': thanks},
+        response =  render_to_response('index.html', {'snippet': random, 'thanks': thanks},
                                   context_instance=RequestContext(request))
+        response['Cache-Control'] = 'no-cache'
+        return response
+    
     elif request.method == 'POST':
-        bias = request.POST['submitButton']
+        bias = request.POST['value']
         snippet_id = request.POST['snippet_id']
         s = get_object_or_404(Snippet, pk=snippet_id)
-        if (bias == 'Leet'):
+        if (bias == '1'):
             s.leet += 1
-        elif(bias == 'Lame'):
+        elif(bias == '-1'):
             s.lame += 1
         s.save()
-        return redirect('index')
-
+        return HttpResponse("Success")
+        #return redirect('index')
+        #return HttpResponseRedirect(reverse('index'))
 
 def upload(request):
     if request.method == 'GET':
@@ -76,5 +82,5 @@ def view(request, snippet_id):
 def bylang(request, language_id):
     lang = get_object_or_404(Language, pk=language_id)
     snippet = Snippet.objects.filter(language=lang).filter(approved=True).order_by('?')[0]
-    return render_to_response('index.html', {'snippet': snippet},context_instance=RequestContext(request))
+    return render_to_response('index.html', {'snippet': snippet, 'bylang':lang.name},context_instance=RequestContext(request))
 

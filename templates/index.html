@@ -15,6 +15,39 @@
 <script type="text/javascript" src="{% static 'js/lang-scala.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/lang-sql.js' %}"></script>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#leetButton').click(function(){
+            $("#hiddenValue").val(1);
+            $("#mainForm").submit();
+        });
+    });
+    
+    $(document).ready(function(){
+        $('#lameButton').click(function(){
+            $("#hiddenValue").val(-1);
+            $("#mainForm").submit();
+        });
+    });
+
+    $(document).ready(function() {
+        $('#mainForm').submit(function() { 
+            $.ajax({ 
+                data: $(this).serialize(),
+                type: $(this).attr('method'), 
+                url: $(this).attr('action'), 
+                success: function(response) { 
+                    location.reload(true);
+                },
+                error: function(e, x, r) { // on error..
+                   location.reload(true);
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
 {% endblock %}
  
 {% block content %}
@@ -45,26 +78,28 @@
             <br><div class="text-right"><a href="{% url "view" snippet.id %}">Share this code</a></div>
         </div>
     </div>
-    <form action="{% url "index" %}" method="post">
+    <form action="{% url "index" %}" method="post" id="mainForm">
         {% csrf_token %}
         <input type="hidden" name="snippet_id" value="{{ snippet.id }}" />
+        <input type="hidden" name="value" value="" id="hiddenValue" />
         <div class="row-fluid">
             <div class="span2 pagination-centered">
-                    <button class="btn btn-danger btn-large" type="submit" value="Lame" name="submitButton" style="margin-left: auto;
-    margin-right: auto;">Lame</button>
+                    <button class="btn btn-danger btn-large" type="button" value="Lame" style="margin-left: auto;
+    margin-right: auto;" id="lameButton">Lame</button>
             </div>
             <div class="span8">
                 <pre class="prettyprint"><code class="{{ snippet.language.language_class}}">{{ snippet.code }}</code></pre>
             </div>
             <div class="span2 pagination-centered">
-                    <button class="btn btn-success btn-large" type="submit" value="Leet" name="submitButton">&nbsp;Leet&nbsp;</button>
+                    <button class="btn btn-success btn-large" type="button" value="Leet" id="leetButton">&nbsp;Leet&nbsp;</button>
             </div>
         </div>
         <div class="row-fluid">
             <div class="span8 offset2">
-                <small>Submitted on {{ snippet.submitDate}} by {{snippet.userName}}</small>
+                <small>Submitted on {{ snippet.submitDate|date:"F d, Y"}} by {{snippet.userName}}</small>
             </div>
         </div>
     </form>
 {% endblock %}
+
 

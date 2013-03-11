@@ -31,8 +31,11 @@
                 <ul class="nav">
                     <li class="headerCell dropdown pull-right {% block active_random %}{% endblock %}">
                     <!-- <a href="{% url "index" %}">Random</a> -->
+                        {% if bylang %}
+                          <a id="drop1" href="" role="button" class="dropdown-toggle" data-toggle="dropdown">Random ({{bylang}})<b class="caret"></b></a>
+                        {% else %}
                           <a id="drop1" href="" role="button" class="dropdown-toggle" data-toggle="dropdown">Random<b class="caret"></b></a>
-                          
+                        {% endif %}
                           <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
                             <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url "index" %}">Any</a></li>
                             <li role="presentation" class="divider"></li>
