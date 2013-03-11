@@ -66,8 +66,8 @@ def upload(request):
                 'form': form
             })
 
-def top(request, limit):
-    limit = int(limit)
+def top(request):
+    limit = 10
     top = sorted(Snippet.objects.filter(approved=True), key=lambda a: a.score, reverse=True)[:limit]
     return render_to_response('top.html', {'top': top, 'limit': limit},
                               context_instance=RequestContext(request))
