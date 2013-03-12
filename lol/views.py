@@ -15,7 +15,7 @@ def index(request):
         if request.session.get('thanks', False):
             request.session['thanks'] = False
             thanks = True
-        response =  render_to_response('index.html', {'snippet': random, 'thanks': thanks},
+        response =  render_to_response('index.html', {'snippet': random, 'thanks': thanks, 'indexView': True},
                                   context_instance=RequestContext(request))
         response['Cache-Control'] = 'no-cache'
         return response
@@ -82,5 +82,5 @@ def view(request, snippet_id):
 def bylang(request, language_id):
     lang = get_object_or_404(Language, pk=language_id)
     snippet = Snippet.objects.filter(language=lang).filter(approved=True).order_by('?')[0]
-    return render_to_response('index.html', {'snippet': snippet, 'bylang':lang.name},context_instance=RequestContext(request))
+    return render_to_response('index.html', {'snippet': snippet, 'bylang':lang.name, 'indexView': True},context_instance=RequestContext(request))
 

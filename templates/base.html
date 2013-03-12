@@ -19,34 +19,32 @@
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" {% block onload %}{% endblock %}>
 <div id="containerX">
     <div id="headerX">
-        <div class="navbar navbar-fixed-top" >
+        <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
-              <div class="container">
-                <ul class="nav">
-                    <li class="headerCell"><a href="{% url "index" %}" class="titlebar pull-center">Leet or Lame</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="navbar-inner">
-                <ul class="nav">
-                    <li class="headerCell dropdown pull-right {% block active_random %}{% endblock %}">
-                    <!-- <a href="{% url "index" %}">Random</a> -->
-                        {% if bylang %}
-                          <a id="drop1" href="" role="button" class="dropdown-toggle" data-toggle="dropdown">Random ({{bylang}})<b class="caret"></b></a>
-                        {% else %}
-                          <a id="drop1" href="" role="button" class="dropdown-toggle" data-toggle="dropdown">Random<b class="caret"></b></a>
-                        {% endif %}
-                          <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url "index" %}">Any</a></li>
-                            <li role="presentation" class="divider"></li>
-                            {% for language in languages %}
-                            <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url "bylang" language.id %}">{{ language.name }}</a></li>
-                            {% endfor %}
-                          </ul>
-                        </li>
-                    <li class="headerCell {% block active_top %}{% endblock %}"><a href="{% url "top" %}">Top 10</a></li>
-                    <li class="headerCell {% block active_upload %}{% endblock %}"><a href="{% url "upload" %}">Add Yours!</a></li>
-                </ul>
+                <div class="container">
+                    <a class="brand pull-left" href="{% url "index" %}">Leet or Lame</a>
+                    <div class="pull-right">
+                        <ul class="nav">
+                            {% if bylang %}
+                                <li class="headerCell {% if indexView %}active{% endif %}"><a id="drop1X" href="{% url "index" %}" role="button" style="padding-right:5px">Random ({{ bylang}})</a></li>
+                            {% else %}
+                                <li class="headerCell {% if indexView %}active{% endif %}"><a id="drop1X" href="{% url "index" %}" role="button" style="padding-right:5px">Random</a></li>
+                             {% endif %}
+                            <li class="dropdown {% block active_random %}{% endblock %}">
+                                <a id="drop1" href="" role="button" class="dropdown-toggle" data-toggle="dropdown" style="padding-left:0"><b class="caret"></b></a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url "index" %}">Any</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    {% for language in languages %}
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url "bylang" language.id %}">{{ language.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li class="headerCell {% block active_top %}{% endblock %}"><a href="{% url "top" %}">Top 10</a></li>
+                            <li class="headerCell {% block active_upload %}{% endblock %}"><a href="{% url "upload" %}">Add Yours!</a></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
             </div>
         </div>
     </div>
