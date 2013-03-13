@@ -191,10 +191,10 @@ $(document).ready(function(){
 function monitorLines() {
     var result = $.countLines("#id_inputCode");
     if(result.actual == 1 && $('#id_inputCode').val() == '') {
-	$('#counter').text(25);
+	$('#counter').text(30);
     }
     else {
-	$('#counter').text(25 - result.actual);
+	$('#counter').text(30 - result.actual);
     }
 }
 

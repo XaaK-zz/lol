@@ -11,7 +11,7 @@ class Language(models.Model):
 
 class Snippet(models.Model):
     description = models.CharField(max_length=200)
-    code        = models.TextField(max_length=1000)
+    code        = models.TextField(max_length=2000)
     code_hash   = models.CharField(max_length=40, unique=True)
     language    = models.ForeignKey(Language)
     leet        = models.IntegerField(default=0)
