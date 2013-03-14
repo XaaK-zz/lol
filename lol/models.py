@@ -5,7 +5,7 @@ import hashlib
 class Language(models.Model):
     name            = models.CharField(max_length=200)
     language_class  = models.CharField(max_length=200)
-    
+    active          = models.BooleanField(default=True)
     def __unicode__(self):
         return u'%s' % (self.name)
 

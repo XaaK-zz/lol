@@ -8,6 +8,6 @@ def tracking(request):
     else:
         return {'tracking_enabled': False,
                 'tracking_account': ""}
-        
+         
 def languages(request):
-    return {'languages': Language.objects.all().extra(select={'lower_name': 'lower(name)'}).order_by('lower_name') }
+    return {'languages': Language.objects.filter(active=True).extra(select={'lower_name': 'lower(name)'}).order_by('lower_name') }
