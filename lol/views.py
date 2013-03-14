@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from lol.models import Snippet, Language
 from django.core.exceptions import ValidationError
 from lol.forms import UploadForm
+from django.core.mail import send_mail
 import json
 
 def index(request):
@@ -60,6 +61,7 @@ def upload(request):
                     'error_message_title': "Oops sorry!"
                 })
             request.session['thanks'] = True
+            #TODO - send email here
             return redirect('index')
         else:
             return render(request, 'upload.html', {
