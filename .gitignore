@@ -1,3 +1,5 @@
 *.pyc
 settings.py
 mysite.sqlite
+*.DS_Store
+venv/

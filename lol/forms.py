@@ -21,7 +21,5 @@ class UploadForm(forms.Form):
                                       empty_label="Select a language...")
     userName = forms.CharField(max_length=200,required=False)
     
-    gist_id = forms.IntegerField(required=False)
-    
     
     

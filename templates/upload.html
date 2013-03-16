@@ -65,16 +65,6 @@
 			{% endif %}
                     </div>
 		</div>
-		<div class="control-group {% if form.gist_id.errors %}error{% endif %}">
-			<label class="control-label" for="gistId">Import gist by id:</label>
-			<div class="controls">
-			    {{ form.gist_id }}
-			    <button type='button' id="import_gist">Import</button>
-			    {% if form.gist_id.errors %}
-			    <span class="help-inline">{{ form.gist_id.errors }}</span>
-			    {% endif %}
-			</div>
-		</div>
             </div>
         </div>
         <div class="row">    
@@ -118,38 +108,6 @@
 <!-- Textarea count from https://bitbucket.org/MostThingsWeb/textarea-line-count/wiki/Home -->
 <script type="text/javascript" src="{% static 'js/jquery.TextareaLineCount.1.4.1.min.js' %}"></script>
 <script type="text/javascript">
-$(document).ready(function(){
-    $('#import_gist').click(function(){ 
-        code_box = $("textarea[name='inputCode']");
-        description_box = $("input[name='description']");
-        language_box = $("select[name='language']");
-        gist_id = $("input[name='gist_id']").val();
-        url = "https://api.github.com/gists/" + gist_id;
-        $.ajax({ 
-            url      : url, 
-            dataType : 'jsonp', 
-            timeout  : 10000,
-            success: function(response) {
-                if(response.data['description']){
-                    description_box.val(response.data['description']);
-                }
-                for (file in response.data.files) {
-                    if (response.data.files.hasOwnProperty(file)) {
-                        var lang = response.data.files[file].language;
-                        if(lang){
-                            var value = $("select option").filter(function() {
-                                  return $(this).text() === lang;
-                            }).first().attr("value");
-                            language_box.val(value);
-                        }
-                        code_box.val(response.data.files[file].content);
-                    }
-                }
-            }
-        }); 
-    });
-});
-
 $(document).ready(function(){
     $('#btnPreview').click(function(){ 
         code_box = $('#id_inputCode');
