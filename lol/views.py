@@ -38,7 +38,8 @@ def upload(request):
     if request.method == 'GET':
         form = UploadForm()
         return render(request, 'upload.html', {
-            'form': form
+            'form': form,
+            'languages':Language.objects.all()
         })
     elif request.method == 'POST':
         form = UploadForm(request.POST) 
@@ -46,7 +47,6 @@ def upload(request):
             desc = form.cleaned_data['description']
             formCode = form.cleaned_data['inputCode']
             lang = form.cleaned_data['language']
-            gistId = form.cleaned_data['gist_id']
             userName = form.cleaned_data['userName']
             attributionData = form.cleaned_data['attribution']
             s = Snippet(code=formCode.strip(), description=desc.strip(), language=lang, userName=userName.strip(), attribution=attributionData.strip())
