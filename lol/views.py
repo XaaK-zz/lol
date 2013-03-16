@@ -48,10 +48,8 @@ def upload(request):
             lang = form.cleaned_data['language']
             gistId = form.cleaned_data['gist_id']
             userName = form.cleaned_data['userName']
-            if(gistId):
-                s = Snippet(code=formCode.strip(), description=desc.strip(), gist_id=gistId, language=lang,userName=userName.strip())
-            else:
-                s = Snippet(code=formCode.strip(), description=desc.strip(), language=lang, userName=userName.strip())
+            attributionData = form.cleaned_data['attribution']
+            s = Snippet(code=formCode.strip(), description=desc.strip(), language=lang, userName=userName.strip(), attribution=attributionData.strip())
             if s.validate():
                 s.save()
             else:

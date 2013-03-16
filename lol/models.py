@@ -19,7 +19,8 @@ class Snippet(models.Model):
     approved    = models.BooleanField(default=False)
     userName    = models.CharField(max_length=200,null=True,blank=True, default="Anonymous")
     submitDate  = models.DateTimeField(auto_now=True, default=datetime.now())
-
+    attribution = models.CharField(max_length=200,null=True,blank=True)
+    
     def __unicode__(self):
         return u'%s' % (self.description)
 
