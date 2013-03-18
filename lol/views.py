@@ -39,7 +39,7 @@ def upload(request):
         form = UploadForm()
         return render(request, 'upload.html', {
             'form': form,
-            'languages':Language.objects.all()
+            'submitLanguages':Language.objects.all()
         })
     elif request.method == 'POST':
         form = UploadForm(request.POST) 

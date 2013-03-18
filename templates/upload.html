@@ -173,7 +173,7 @@ function monitorLines() {
 }
 
 var lang_lookup={
-    {% for language in languages %}
+    {% for language in submitLanguages %}
     {{ language.id }}:["{{ language.language_class }}"],
     {% endfor %}
 };
