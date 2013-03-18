@@ -30,6 +30,9 @@ class Snippet(models.Model):
 
     def validate(self):
         self.code_hash = hashlib.sha1(self.code.strip()).hexdigest()
+        if self.userName == "":
+            self.userName = "Anonymous"
+            
         checkQuery = Snippet.objects.filter(code_hash=self.code_hash)
         
         return len(checkQuery) == 0
