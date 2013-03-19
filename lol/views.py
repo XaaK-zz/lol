@@ -63,7 +63,8 @@ def upload(request):
             return redirect('index')
         else:
             return render(request, 'upload.html', {
-                'form': form
+                'form': form,
+                'submitLanguages':Language.objects.all()
             })
 
 def top(request):
