@@ -1,24 +1,23 @@
 # Django settings for mysite project.
 import os
 
-DEBUG = True
+DEBUG = os.environ.get('DEBUG')
 TEMPLATE_DEBUG = DEBUG
 
-
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+     (os.environ.get('ADMIN_NAME'), os.environ.get('ADMIN_EMAIL'))
 )
 
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',   # 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'lol',    # '/Users/XaaK/Documents/Development/Django/lol/mysite/mysite.sqlite',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',   
+        'NAME': 'lol',    
+        'USER': '',                      
+        'PASSWORD': '',                  
+        'HOST': 'localhost',
+        'PORT': '',                      
     }
 }
 
@@ -169,9 +168,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "mysite.context_processors.languages"
 )
 
+TRACKING_ENABLED    = os.environ.get('TRACKING_ENABLED')
+TRACKING_ACCOUNT    = os.environ.get('TRACKING_ACCOUNT')
+
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-if os.environ.get('OVERRIDE_DB'):
+if os.environ.get('OVERRIDE_DB') == "True":
     DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
