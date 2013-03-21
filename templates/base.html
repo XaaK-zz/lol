@@ -9,9 +9,11 @@
 {% block extrastyle %}{% endblock %}
 {% block extrahead %}{% endblock %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Bootstrap -->
+<!-- Bootstrap 
 <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
 <link href="{% static 'css/bootstrap-responsive.min.css' %}" rel="stylesheet" media="screen">
+-->
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 <link href="{% static 'css/lol.css' %}" rel="stylesheet" media="screen">
 <link href="{% static 'css/sunburst.css' %}" rel="stylesheet">
 <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
@@ -97,7 +99,8 @@
 </div>
 <!-- END Container -->
 <script src="http://code.jquery.com/jquery.js"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!--<script src="{% static 'js/bootstrap.min.js' %}"></script>-->
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 {% block eofjavascript %}{% endblock %}
 {% if tracking_enabled %}
 <script type="text/javascript">
