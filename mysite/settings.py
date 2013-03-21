@@ -1,7 +1,10 @@
 # Django settings for mysite project.
 import os
 
-DEBUG = os.environ.get('DEBUG')
+if os.environ.get('DEBUG') == "True":
+    DEBUG = True
+else
+    DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
