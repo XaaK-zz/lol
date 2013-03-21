@@ -41,7 +41,21 @@
                                     {% endfor %}
                                 </ul>
                             </li>
-                            <li class="headerCell {% block active_top %}{% endblock %}"><a href="{% url "top" %}">Top 10</a></li>
+                            {% if langTop %}
+                                <li class="headerCell {% if top %}active{% endif %}"><a id="droplang" href="{% url "toplang" langTop.id %}" role="button" style="padding-right:5px">Top 10 ({{ langTop.name}})</a></li>
+                            {% else %}
+                                <li class="headerCell {% if top %}active{% endif %}"><a id="droplang" href="{% url "top" %}" role="button" style="padding-right:5px">Top 10</a></li>
+                            {% endif %}
+                            <li class="dropdown {% block active_top %}{% endblock %}">
+                                <a id="droplangArrow" href="" role="button" class="dropdown-toggle" data-toggle="dropdown" style="padding-left:0"><b class="caret"></b></a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="droplang">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url "top" %}">Any</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    {% for language in languages %}
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{% url "toplang" language.id %}">{{ language.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
                             <li class="headerCell {% block active_upload %}{% endblock %}"><a href="{% url "upload" %}">Add Yours!</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->

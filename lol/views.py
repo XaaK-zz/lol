@@ -67,10 +67,15 @@ def upload(request):
                 'submitLanguages':Language.objects.all()
             })
 
-def top(request):
+def top(request, language_id=None):
     limit = 10
-    top = sorted(Snippet.objects.filter(approved=True), key=lambda a: a.score, reverse=True)[:limit]
-    return render_to_response('top.html', {'top': top, 'limit': limit},
+    lang = None
+    if language_id != None:
+        lang = get_object_or_404(Language, pk=language_id)
+        top = sorted(Snippet.objects.filter(approved=True).filter(language=lang), key=lambda a: a.score, reverse=True)[:limit]
+    else:
+        top = sorted(Snippet.objects.filter(approved=True), key=lambda a: a.score, reverse=True)[:limit]
+    return render_to_response('top.html', {'top': top, 'limit': limit, 'langTop': lang},
                               context_instance=RequestContext(request))
 
 def view(request, snippet_id):
