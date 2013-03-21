@@ -3,7 +3,7 @@ import os
 
 if os.environ.get('DEBUG') == "True":
     DEBUG = True
-else
+else:
     DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
@@ -171,7 +171,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "mysite.context_processors.languages"
 )
 
-TRACKING_ENABLED    = os.environ.get('TRACKING_ENABLED')
+if os.environ.get('TRACKING_ENABLED') == "True":
+    TRACKING_ENABLED = True
+else:
+    TRACKING_ENABLED = False
 TRACKING_ACCOUNT    = os.environ.get('TRACKING_ACCOUNT')
 
 # Parse database configuration from $DATABASE_URL
