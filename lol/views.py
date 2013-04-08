@@ -90,3 +90,6 @@ def bylang(request, language_id):
     snippet = Snippet.objects.filter(language=lang).filter(approved=True).order_by('?')[0]
     return render_to_response('index.html', {'snippet': snippet, 'lang':lang, 'indexView': True},context_instance=RequestContext(request))
 
+def about(request):
+    return render_to_response('about.html')
+    
