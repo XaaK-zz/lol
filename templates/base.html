@@ -25,7 +25,7 @@
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="brand pull-left" href="{% url "index" %}">Leet or Lame</a>
+                    <a class="brand" href="{% url "index" %}"><span style="visible-phone">&nbsp;&nbsp;&nbsp;&nbsp;</span>Leet or Lame</a>
                     <div class="pull-right">
                         <ul class="nav">
                             {% if lang %}
@@ -88,11 +88,18 @@
 
     {% block footer %}
     <div id="footerX">
-            <div class="row">
+            <div class="row hidden-phone">
                 <div class="span5 offset1">
                     <small>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">Creative <br>Commons Attribution 3.0 United States License</a>.</small>
                 </div>
                 <div class="span1 offset5">
+                    <nobr><small><a href="mailto:contact@leetorlame.com">Contact Us</a></small></nobr>
+                </div>
+            </div>
+            <div class="row visible-phone">
+                <div class="span11 offset1">
+                    <small>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.</small>
+                <br>
                     <nobr><small><a href="mailto:contact@leetorlame.com">Contact Us</a></small></nobr>
                 </div>
             </div>
